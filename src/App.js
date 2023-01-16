@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useState } from "react";
+import "./App.css";
+import Painel from "./Painel";
+import Teclado from "./Teclado";
+
+export const PalavrasContext = createContext([]);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [tentativas, setTentativas] = useState([]);
+    const [atual, setAtual] = useState("");
+
+    return (
+        <div className="App">
+            <h3>Mateus</h3> <hr />
+            <PalavrasContext.Provider
+                value={{ tentativas, setTentativas, atual, setAtual }}
+            >
+                <div className="Coluna ColunaCenter">
+                    <Painel />
+                    <Teclado />
+                </div>
+            </PalavrasContext.Provider>
+        </div>
+    );
 }
 
 export default App;

@@ -2,37 +2,56 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Coluna {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.ColunaCenter {
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Linha {
+  display: flex;
+  flex-direction: row;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Gap {
+  gap: 10px;
+}
+
+.GapTecla {
+  gap: 5px;
+}
+
+.Letra {
+  height: 50px;
+  width: 50px;
+  font-weight: bold;
+  line-height: 50px;
+  font-size: 20px;
+}
+
+.LetraInicial {
+  background-color: #d3d3d3;
+}
+
+.LetraAtual {
+  box-sizing: border-box;
+  border: 1px solid #d3d3d3;
+}
+
+.LetraAlterada {
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+.Tecla {
+  height: 45px;
+  width: 35px;
+  line-height: 45px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #d3d3d3;
 }
