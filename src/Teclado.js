@@ -1,13 +1,14 @@
 import { useContext, useEffect } from "react";
 import { PalavrasContext } from "./App";
 import "./App.css";
+import quantasAlts from "./services/quantas_alteracoes";
 
 function Teclado() {
     const linhaCima = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     const linhaMeio = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const linhaBaixo = ["Z", "X", "C", "V", "B", "N", "M"];
 
-    const { atual, setAtual, tentativas, setTentativas } =
+    const { atual, setAtual, tentativas, setTentativas, iniciais } =
         useContext(PalavrasContext);
 
     function handleTecla(letra) {
@@ -42,14 +43,29 @@ function Teclado() {
             return;
         }
 
+        // alterou só uma letra?
+        const anterior =
+            tentativas.length > 0 ? tentativas.slice(-1)[0] : iniciais.inicial;
+
+        const alts = quantasAlts(anterior, atual);
+
+        if (alts === 0) {
+            // alert
+            return;
+        }
+
+        if (alts > 1) {
+            // alert traveis
+            return;
+        }
+
+        // a palavra existe?
+
         setTentativas((value) => [...value, atual]);
         setAtual("");
     }
 
     function handleTeclado(event) {
-        console.log("----------");
-        console.log("Event: ", event.key);
-
         if (event.key === "Enter") {
             handleEnter();
             return;

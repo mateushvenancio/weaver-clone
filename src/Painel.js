@@ -8,8 +8,8 @@ function Painel() {
     return (
         <div className="Coluna">
             <Iniciais palavra={iniciais.inicial} />
-            {tentativas.map((value) => (
-                <Tentativa palavra={value} />
+            {tentativas.map((value, index) => (
+                <Tentativa palavra={value} index={index} />
             ))}
             <Atual />
             <Iniciais palavra={iniciais.final} />
@@ -17,13 +17,34 @@ function Painel() {
     );
 }
 
-function Tentativa({ palavra, indexChanged }) {
+function Tentativa({ palavra, index }) {
+    const { tentativas, iniciais } = useContext(PalavrasContext);
+
+    function getClasses(letraIndex) {
+        const classes = ["Letra", "LetraAtual"];
+
+        const ultima = tentativas[index - 1] || iniciais.inicial;
+
+        if (ultima[letraIndex] !== palavra[letraIndex]) {
+            classes.push("LetraAlterada");
+        }
+
+        if (
+            palavra[letraIndex].toUpperCase() ===
+            iniciais.final[letraIndex].toUpperCase()
+        ) {
+            classes.push("LetraVerde");
+        }
+
+        return classes.join(" ");
+    }
+
     return (
         <div className="Linha Gap">
-            <div className="Letra LetraAtual">{palavra[0].toUpperCase()}</div>
-            <div className="Letra LetraAtual">{palavra[1].toUpperCase()}</div>
-            <div className="Letra LetraAtual">{palavra[2].toUpperCase()}</div>
-            <div className="Letra LetraAtual">{palavra[3].toUpperCase()}</div>
+            <div className={getClasses(0)}>{palavra[0].toUpperCase()}</div>
+            <div className={getClasses(1)}>{palavra[1].toUpperCase()}</div>
+            <div className={getClasses(2)}>{palavra[2].toUpperCase()}</div>
+            <div className={getClasses(3)}>{palavra[3].toUpperCase()}</div>
         </div>
     );
 }

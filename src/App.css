@@ -47,6 +47,11 @@
   border: 1px solid black;
 }
 
+.LetraVerde {
+  background-color: green;
+  color: white;
+}
+
 .Tecla {
   height: 45px;
   width: 35px;
