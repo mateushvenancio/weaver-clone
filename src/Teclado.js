@@ -8,7 +8,7 @@ function Teclado() {
     const linhaMeio = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const linhaBaixo = ["Z", "X", "C", "V", "B", "N", "M"];
 
-    const { atual, setAtual, tentativas, setTentativas, iniciais } =
+    const { atual, setAtual, tentativas, setTentativas, iniciais, banco } =
         useContext(PalavrasContext);
 
     function handleTecla(letra) {
@@ -60,6 +60,11 @@ function Teclado() {
         }
 
         // a palavra existe?
+        if (!banco.includes(atual.toUpperCase())) {
+            // alert não existe
+            console.log("Não tem biscoito!!!!!!!!!!!!");
+            return;
+        }
 
         setTentativas((value) => [...value, atual]);
         setAtual("");

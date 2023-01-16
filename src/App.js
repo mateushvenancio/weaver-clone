@@ -1,6 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "./App.css";
 import Painel from "./Painel";
+import getPalavras from "./services/get_palavras";
 import Teclado from "./Teclado";
 
 export const PalavrasContext = createContext([]);
@@ -9,9 +10,15 @@ function App() {
     const [tentativas, setTentativas] = useState([]);
     const [atual, setAtual] = useState("");
     const [iniciais, setIniciais] = useState({
-        inicial: "Abut",
-        final: "Meet",
+        inicial: "AULO",
+        final: "MURO",
     });
+    const [banco, setBanco] = useState([]);
+
+    useEffect(() => {
+        const palavras = getPalavras();
+        setBanco(palavras);
+    }, []);
 
     return (
         <div className="App">
@@ -24,6 +31,8 @@ function App() {
                     setAtual,
                     iniciais,
                     setIniciais,
+                    banco,
+                    setBanco,
                 }}
             >
                 <div className="Coluna ColunaCenter">
