@@ -8,12 +8,23 @@ export const PalavrasContext = createContext([]);
 function App() {
     const [tentativas, setTentativas] = useState([]);
     const [atual, setAtual] = useState("");
+    const [iniciais, setIniciais] = useState({
+        inicial: "Abut",
+        final: "Meet",
+    });
 
     return (
         <div className="App">
-            <h3>Mateus</h3> <hr />
+            <h3>WEAVER</h3> <hr />
             <PalavrasContext.Provider
-                value={{ tentativas, setTentativas, atual, setAtual }}
+                value={{
+                    tentativas,
+                    setTentativas,
+                    atual,
+                    setAtual,
+                    iniciais,
+                    setIniciais,
+                }}
             >
                 <div className="Coluna ColunaCenter">
                     <Painel />

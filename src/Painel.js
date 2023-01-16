@@ -3,22 +3,29 @@ import { PalavrasContext } from "./App";
 import "./App.css";
 
 function Painel() {
-    const { tentativas } = useContext(PalavrasContext);
+    const { tentativas, iniciais } = useContext(PalavrasContext);
 
     return (
         <div className="Coluna">
-            <Iniciais palavra={"Abut"} />
+            <Iniciais palavra={iniciais.inicial} />
             {tentativas.map((value) => (
                 <Tentativa palavra={value} />
             ))}
             <Atual />
-            <Iniciais palavra={"Meet"} />
+            <Iniciais palavra={iniciais.final} />
         </div>
     );
 }
 
 function Tentativa({ palavra, indexChanged }) {
-    <div className="Letra LetraAtual">{palavra}</div>;
+    return (
+        <div className="Linha Gap">
+            <div className="Letra LetraAtual">{palavra[0].toUpperCase()}</div>
+            <div className="Letra LetraAtual">{palavra[1].toUpperCase()}</div>
+            <div className="Letra LetraAtual">{palavra[2].toUpperCase()}</div>
+            <div className="Letra LetraAtual">{palavra[3].toUpperCase()}</div>
+        </div>
+    );
 }
 
 function Atual() {
