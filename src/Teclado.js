@@ -8,10 +8,20 @@ function Teclado() {
     const linhaMeio = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const linhaBaixo = ["Z", "X", "C", "V", "B", "N", "M"];
 
-    const { atual, setAtual, tentativas, setTentativas, iniciais, banco } =
-        useContext(PalavrasContext);
+    const {
+        atual,
+        setAtual,
+        tentativas,
+        setTentativas,
+        iniciais,
+        banco,
+        mostrarAlert,
+        end,
+        setEnd,
+    } = useContext(PalavrasContext);
 
     function handleTecla(letra) {
+        if (end) return;
         const letras = [...linhaCima, ...linhaMeio, ...linhaBaixo];
         if (!letras.includes(letra)) return;
         if (atual.length === 4) return;
@@ -20,6 +30,7 @@ function Teclado() {
     }
 
     function handleDelete() {
+        if (end) return;
         if (atual.length === 0) {
             if (tentativas.length === 0) return;
 
@@ -38,36 +49,40 @@ function Teclado() {
     }
 
     function handleEnter() {
+        if (end) return;
         if (atual.length !== 4) {
-            // mostrar alert
+            mostrarAlert("Palavra deve ter exatamente 4 letras");
             return;
         }
 
-        // alterou só uma letra?
         const anterior =
             tentativas.length > 0 ? tentativas.slice(-1)[0] : iniciais.inicial;
 
         const alts = quantasAlts(anterior, atual);
 
         if (alts === 0) {
-            // alert
+            mostrarAlert("Deve mudar pelo menos uma letra");
             return;
         }
 
         if (alts > 1) {
-            // alert traveis
+            mostrarAlert("Deve mudar apenas uma letra de cada vez");
             return;
         }
 
-        // a palavra existe?
         if (!banco.includes(atual.toUpperCase())) {
-            // alert não existe
-            console.log("Não tem biscoito!!!!!!!!!!!!");
+            mostrarAlert("Essa palavra não existe");
             return;
         }
 
         setTentativas((value) => [...value, atual]);
         setAtual("");
+
+        console.log(`Uai kkk ${atual} - ${iniciais.inicial}`);
+
+        if (atual === iniciais.final) {
+            setEnd(true);
+        }
     }
 
     function handleTeclado(event) {

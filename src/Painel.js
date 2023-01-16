@@ -3,7 +3,7 @@ import { PalavrasContext } from "./App";
 import "./App.css";
 
 function Painel() {
-    const { tentativas, iniciais } = useContext(PalavrasContext);
+    const { tentativas, iniciais, end } = useContext(PalavrasContext);
 
     return (
         <div className="Coluna">
@@ -11,7 +11,7 @@ function Painel() {
             {tentativas.map((value, index) => (
                 <Tentativa palavra={value} index={index} />
             ))}
-            <Atual />
+            {!end && <Atual />}
             <Iniciais palavra={iniciais.final} />
         </div>
     );

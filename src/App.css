@@ -64,3 +64,11 @@
 .TeclaGrande {
   width: 65px;
 }
+
+.Alert {
+  color: red;
+}
+
+.Negrito {
+  font-weight: bold;
+}

@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import Alert from "./Alert";
 import "./App.css";
 import Painel from "./Painel";
 import getPalavras from "./services/get_palavras";
@@ -14,6 +15,15 @@ function App() {
         final: "MURO",
     });
     const [banco, setBanco] = useState([]);
+    const [alert, setAlert] = useState(" ");
+    const [end, setEnd] = useState(false);
+
+    function mostrarAlert(mensagem) {
+        setAlert(mensagem);
+        setTimeout(() => {
+            setAlert(" ");
+        }, "2000");
+    }
 
     useEffect(() => {
         const palavras = getPalavras();
@@ -33,10 +43,15 @@ function App() {
                     setIniciais,
                     banco,
                     setBanco,
+                    alert,
+                    mostrarAlert,
+                    end,
+                    setEnd,
                 }}
             >
                 <div className="Coluna ColunaCenter">
                     <Painel />
+                    <Alert />
                     <Teclado />
                 </div>
             </PalavrasContext.Provider>
