@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { PalavrasContext } from "./App";
 import "./App.css";
+import { salvarTentativas } from "./services/local_storage_service";
 
 export default function Alert() {
     const { end, alert, setTentativas, setEnd } = useContext(PalavrasContext);
@@ -10,6 +11,7 @@ export default function Alert() {
 
         setTentativas([]);
         setEnd(false);
+        salvarTentativas([]);
     }
 
     return (

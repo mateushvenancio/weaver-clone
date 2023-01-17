@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { PalavrasContext } from "./App";
 import "./App.css";
+import { salvarTentativas } from "./services/local_storage_service";
 import quantasAlts from "./services/quantas_alteracoes";
 
 function Teclado() {
@@ -75,10 +76,9 @@ function Teclado() {
             return;
         }
 
+        salvarTentativas([...tentativas, atual]);
         setTentativas((value) => [...value, atual]);
         setAtual("");
-
-        console.log(`Uai kkk ${atual} - ${iniciais.inicial}`);
 
         if (atual === iniciais.final) {
             setEnd(true);

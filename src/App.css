@@ -17,6 +17,20 @@
   flex-direction: row;
 }
 
+.Barra {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.BotaoBarra {
+  border: 1px solid grey;
+  border-radius: 45px;
+  padding: 5px 10px;
+}
+
 .Gap {
   gap: 10px;
 }

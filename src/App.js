@@ -1,8 +1,15 @@
 import { createContext, useEffect, useState } from "react";
 import Alert from "./Alert";
 import "./App.css";
+import Barra from "./Barra";
 import Painel from "./Painel";
+import { getRandomGame } from "./services/get_games";
 import getPalavras from "./services/get_palavras";
+import {
+    getJogoSalvo,
+    getTentativasSalvas,
+    salvarJogo,
+} from "./services/local_storage_service";
 import Teclado from "./Teclado";
 
 export const PalavrasContext = createContext([]);
@@ -11,8 +18,8 @@ function App() {
     const [tentativas, setTentativas] = useState([]);
     const [atual, setAtual] = useState("");
     const [iniciais, setIniciais] = useState({
-        inicial: "AULO",
-        final: "MURO",
+        inicial: "PEGA",
+        final: "RATO",
     });
     const [banco, setBanco] = useState([]);
     const [alert, setAlert] = useState(" ");
@@ -26,13 +33,30 @@ function App() {
     }
 
     useEffect(() => {
+        const jogoSalvo = getJogoSalvo();
+        if (jogoSalvo) {
+            setIniciais(jogoSalvo);
+            const tentativasSalvas = getTentativasSalvas();
+            setTentativas(tentativasSalvas || []);
+
+            if (tentativasSalvas.length > 0) {
+                const ultima = tentativasSalvas[tentativasSalvas.length - 1];
+                if (ultima === jogoSalvo.final) {
+                    setEnd(true);
+                }
+            }
+        } else {
+            const novoJogo = getRandomGame();
+            salvarJogo(novoJogo);
+            setIniciais(novoJogo);
+        }
+
         const palavras = getPalavras();
         setBanco(palavras);
     }, []);
 
     return (
         <div className="App">
-            <h3>WEAVER</h3> <hr />
             <PalavrasContext.Provider
                 value={{
                     tentativas,
@@ -49,6 +73,7 @@ function App() {
                     setEnd,
                 }}
             >
+                <Barra /> <hr />
                 <div className="Coluna ColunaCenter">
                     <Painel />
                     <Alert />
