@@ -36,7 +36,7 @@ function App() {
         const jogoSalvo = getJogoSalvo();
         if (jogoSalvo) {
             setIniciais(jogoSalvo);
-            const tentativasSalvas = getTentativasSalvas();
+            const tentativasSalvas = getTentativasSalvas() || [];
             setTentativas(tentativasSalvas || []);
 
             if (tentativasSalvas.length > 0) {
